@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Login Page</title>
+<script>
+function disableButtons() {
+    document.getElementById("loginButton").disabled = true;
+    document.getElementById("signupButton").disabled = true;
+}
+
+function checkLoginStatus() {
+    var isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if (isLoggedIn) {
+        disableButtons();
+    }
+}
+
+function logout() {
+    localStorage.removeItem("isLoggedIn");
+    disableButtons();
+}
+
+function enableButtons() {
+    document.getElementById("loginButton").disabled = true;
+    document.getElementById("signupButton").disabled = true;
+}
+</script>
+</head>
+<body onload="checkLoginStatus()">
+    <div>
+        <form action="loginlink">
+        <label>Enter Username</label>
+        <input type="text" name="user" /><br><br>
+        <label>Enter Password</label>
+        <input type="text" name="password" /><br><br>
+        <input type="submit" id="loginButton" value="LOGIN" />
+    </form>
+    </div>
+    <div>
+        <a href="signup.html"><input type="submit" id="signupButton" value="SIGNUP" /></a>
+    </div>
+    <button onclick="logout()">Logout</button>
+    <script>
+    // Check if the user is logged in or not
+    // You can replace this condition with your actual logic to determine the login status
+    var isLoggedIn = localStorage.getItem("isLoggedIn");
+
+    if (isLoggedIn) {
+        disableButtons();
+    }
+    
+    // Add event listeners to the login and signup forms
+    document.querySelector('form[action="loginlink"]').addEventListener('submit', function() {
+        localStorage.setItem("isLoggedIn", true);
+        disableButtons();
+    });
+
+    document.querySelector('a[href="signup.html"]').addEventListener('click', function() {
+        localStorage.setItem("isLoggedIn", true);
+        disableButtons();
+    });
+    </script>
+</body>
+</html>
